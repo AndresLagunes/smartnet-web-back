@@ -1,16 +1,29 @@
 const { DataTypes, Model } = require('sequelize');
-const { sequelize } = require('../../database/db'); 
+const { sequelize } = require('../../../database/db'); 
+class Application extends Model {}
 
-class Status extends Model {}
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Application model connected to the database.');
+  })
+  .catch((err) => {
+    console.error('Application model unable to connect to the database:', err);
+  });
 
 
-
-Status.init({
+Application.init({
   // Model attributes are defined here
-  statusName: {
+  applicationName: {
     type: DataTypes.STRING(100),
     allowNull: false
   },
+  description: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+
+
   // common
   // id: {
   //   type: DataTypes.INTEGER,
@@ -19,6 +32,11 @@ Status.init({
   //   allowNull: false,
   //   autoIncrementIdentity: true
   // },
+  statusId: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  }
+  ,
   createdAt: {
     type: DataTypes.DATE,
     allowNull: true,
@@ -26,7 +44,7 @@ Status.init({
   },
   createdBy: {
     type: DataTypes.INTEGER,
-    allowNull: true,
+    allowNull: false,
   },
   updatedAt: {
     type: DataTypes.DATE,
@@ -35,12 +53,13 @@ Status.init({
   },
   updatedBy: {
     type: DataTypes.INTEGER,
-    allowNull: true,
+    allowNull: false,
   }
 }, {
   sequelize,
-  modelName: 'status',
+  modelName: 'application',
   schema: 'security',
 });
 
-module.exports = Status;
+
+module.exports = Application;

@@ -1,4 +1,4 @@
-const { User, Status, Application } = require('../models');
+const { User, Status, Application } = require('../../models/');
 // const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
@@ -27,7 +27,7 @@ const getAllUsers = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    const { username, password, applicationId, statusId} = req.body._rawValue;
+    const { username, password, applicationId, statusId } = req.body;
     const newUser = await User.create({
       "username": username,
       "password": password,
@@ -36,6 +36,50 @@ const createUser = async (req, res) => {
     });
     return res.status(201).json({
       user: newUser,
+      success: true,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Internal server error', e: error });
+  }
+};
+
+const editUser = async (req, res) => {
+  try {
+    const { id, username, password, applicationId, statusId } = req.body;
+    // console.log(id);
+    const updatedUser = await User.update({
+      "username": username,
+      // "password": password,
+      "applicationId": applicationId,
+      "statusId": statusId
+    }, {
+      where: {
+        id: id
+      }
+    });
+    return res.status(201).json({
+      // user: newUser,
+      success: true,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Internal server error', e: error });
+  }
+};
+
+const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.body;
+    console.log(id);
+    const updatedUser = await User.update({
+      "statusId": 0
+    }, {
+      where: {
+        id: id
+      }
+    });
+    return res.status(201).json({
       success: true,
     });
   } catch (error) {
@@ -54,7 +98,7 @@ const login = async (req, res) => {
     console.log(user);
     // If the user does not exist, return an error response
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.json({ error: 'Usuario o contraseña incorrecto', success: false });
     }
     // Compare the provided password with the stored hashed password
     const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -66,7 +110,7 @@ const login = async (req, res) => {
         success: true,
       });
     } else {
-      return res.status(401).json({ error: 'Invalid password' });
+      return res.json({ error: 'Usuario o contraseña incorrecto', success: false });
     }
   } catch (error) {
     console.error(error);
@@ -78,5 +122,7 @@ const login = async (req, res) => {
 module.exports = {
   getAllUsers,
   createUser,
+  editUser,
+  deleteUser,
   login,
 };

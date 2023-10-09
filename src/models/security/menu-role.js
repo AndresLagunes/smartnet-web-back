@@ -1,29 +1,29 @@
 const { DataTypes, Model } = require('sequelize');
-const { sequelize } = require('../../database/db'); 
-class Application extends Model {}
+const { sequelize } = require('../../../database/db'); 
+class MenuRole extends Model {}
 
 sequelize
   .authenticate()
   .then(() => {
-    console.log('Application model connected to the database.');
+    console.log('MenuRole model connected to the database.');
   })
   .catch((err) => {
-    console.error('Application model unable to connect to the database:', err);
+    console.error('MenuRole model unable to connect to the database:', err);
   });
 
 
-Application.init({
+MenuRole.init({
   // Model attributes are defined here
-  applicationName: {
-    type: DataTypes.STRING(100),
+  roleId: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
     allowNull: false
   },
-  description: {
-    type: DataTypes.STRING,
-    allowNull: true
+  applicationId: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    allowNull: false,
   },
-
-
   // common
   id: {
     type: DataTypes.INTEGER,
@@ -57,9 +57,8 @@ Application.init({
   }
 }, {
   sequelize,
-  modelName: 'application',
+  modelName: 'menuRole',
   schema: 'security',
 });
 
-
-module.exports = Application;
+module.exports = MenuRole;

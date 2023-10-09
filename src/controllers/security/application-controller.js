@@ -1,11 +1,11 @@
-const { Status } = require('../models');
+const Application = require('../../models/security/application');
 
 
-const getAllStatuses = async (req, res) => {
+const getAllApplications = async (req, res) => {
   try {
-    const statuses = await Status.findAll();
+    const applications = await Application.findAll();
     return res.status(201).json({
-      statuses: statuses,
+      applications: applications,
       success: true,
     });
   } catch (error) {
@@ -14,11 +14,11 @@ const getAllStatuses = async (req, res) => {
   }
 };
 
-const createStatus= async (req, res) => {
+const createApplication= async (req, res) => {
   try {
-    const newStatus = await Status.create(req.body);
+    const newApplication = await Application.create(req.body);
     return res.status(201).json({
-      status: newStatus,
+      application: newApplication,
       success: true,
     });
   } catch (error) {
@@ -28,6 +28,6 @@ const createStatus= async (req, res) => {
 };
 
 module.exports = {
-  getAllStatuses,
-  createStatus,
+  getAllApplications,
+  createApplication,
 };

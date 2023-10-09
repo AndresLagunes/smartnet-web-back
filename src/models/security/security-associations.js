@@ -16,6 +16,7 @@ module.exports = (sequelize) => {
 
   //ROLE
   Role.belongsTo(Application);
+  Role.belongsTo(Status);
   // Role.hasMany(UserRole);
 
   Menu.belongsTo(Application);

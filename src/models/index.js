@@ -1,16 +1,16 @@
-const User = require("../models/user");
-const Role = require("../models/role");
-const Application = require("../models/application");
-const Status = require("../models/status");
-const MenuRole = require("../models/menu-role");
-const UserRole = require("../models/user-role");
+const User = require("../models/security/user");
+const Role = require("../models/security/role");
+const Application = require("../models/security/application");
+const Status = require("../models/security/status");
+const MenuRole = require("../models/security/menu-role");
+const UserRole = require("../models/security/user-role");
 
 const { sequelize } = require("../../database/db"); // Import the sequelize instance
 
-const createAssociations = require("./associations");
+const createAssociations = require("./security/security-associations");
 createAssociations(sequelize);
 
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
     console.log("Database syncronized");
   })
   .catch((error) => {

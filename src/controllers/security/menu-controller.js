@@ -1,4 +1,4 @@
-const Menu = require('../models/menu');
+const Menu = require('../models/security/menu');
 
 const getAllMenus = (Menu) => async (req, res) => {
   const menus = await Menu.findAll();

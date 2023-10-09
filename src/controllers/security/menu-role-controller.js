@@ -1,4 +1,4 @@
-const MenuRole = require('../models/menu-role');
+const MenuRole = require('../models/security/menu-role');
 
 const getAllMenuRoles = (MenuRole) => async (req, res) => {
   const menuRoles = await MenuRole.findAll();

@@ -1,5 +1,5 @@
 const { DataTypes, Model } = require('sequelize');
-const { sequelize } = require('../../database/db'); 
+const { sequelize } = require('../../../database/db'); 
 class Role extends Model {}
 
 sequelize
@@ -22,21 +22,19 @@ Role.init({
     type: DataTypes.STRING,
     allowNull: true
   },
-  roleName: {
-    type: DataTypes.STRING(100),
-    allowNull: false
-  },
+
+  // ??
   bReqSuc: {
     type: DataTypes.SMALLINT,
-    allowNull: false
+    allowNull: true
   },
   bReqProv: {
     type: DataTypes.SMALLINT,
-    allowNull: false
+    allowNull: true
   },
   idTipoCargo: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: true
   },
 
 
@@ -46,13 +44,13 @@ Role.init({
     allowNull: false,
   },
   // common
-  id: {
-    type: DataTypes.INTEGER,
-    unique: true,
-    primaryKey: true,
-    allowNull: false,
-    autoIncrementIdentity: true
-  },
+  // id: {
+  //   type: DataTypes.INTEGER,
+  //   unique: true,
+  //   primaryKey: true,
+  //   allowNull: false,
+  //   autoIncrementIdentity: true
+  // },
   statusId: {
     type: DataTypes.INTEGER,
     allowNull: false
@@ -65,7 +63,7 @@ Role.init({
   },
   createdBy: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   updatedAt: {
     type: DataTypes.DATE,
@@ -74,7 +72,7 @@ Role.init({
   },
   updatedBy: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   }
 }, {
   sequelize,
