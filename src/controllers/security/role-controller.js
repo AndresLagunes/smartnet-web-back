@@ -28,7 +28,7 @@ const getAllRoles = async (req, res) => {
 const createRole = async (req, res) => {
   try {
     const { roleName, description, applicationId, statusId } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     const newRole = await Role.create({
       "roleName": roleName,
       "description": description,
@@ -47,10 +47,10 @@ const createRole = async (req, res) => {
 
 const editRole = async (req, res) => {
   try {
-    const { id, rolename, description, applicationId, statusId } = req.body;
+    const { id, roleName, description, applicationId, statusId } = req.body;
     // console.log(id);
     const updatedRole = await Role.update({
-      "rolename": rolename,
+      "roleName": roleName,
       "description": description,
       "applicationId": applicationId,
       "statusId": statusId

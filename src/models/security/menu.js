@@ -14,7 +14,7 @@ sequelize
 
 Menu.init({
   // Model attributes are defined here
-  idMenuParent: {
+  idParent: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
@@ -26,7 +26,7 @@ Menu.init({
     type: DataTypes.STRING(100),
     allowNull: false
   },
-  idHtml: {
+  path: {
     type: DataTypes.STRING,
     allowNull: true
   },
@@ -58,17 +58,17 @@ Menu.init({
 
   applicationId: {
     type: DataTypes.INTEGER,
-    primaryKey: true,
+    // primaryKey: true,
     allowNull: false,
   },
   // common
-  id: {
-    type: DataTypes.INTEGER,
-    unique: true,
-    primaryKey: true,
-    allowNull: false,
-    autoIncrementIdentity: true
-  },
+  // id: {
+  //   type: DataTypes.INTEGER,
+  //   unique: true,
+  //   primaryKey: true,
+  //   allowNull: false,
+  //   autoIncrementIdentity: true
+  // },
   statusId: {
     type: DataTypes.INTEGER,
     allowNull: false
@@ -81,7 +81,7 @@ Menu.init({
   },
   createdBy: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   updatedAt: {
     type: DataTypes.DATE,
@@ -90,7 +90,7 @@ Menu.init({
   },
   updatedBy: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   }
 }, {
   sequelize,

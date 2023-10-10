@@ -40,7 +40,7 @@ Role.init({
 
   applicationId: {
     type: DataTypes.INTEGER,
-    primaryKey: true,
+    // primaryKey: true,
     allowNull: false,
   },
   // common

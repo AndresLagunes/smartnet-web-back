@@ -14,24 +14,26 @@ sequelize
 
 MenuRole.init({
   // Model attributes are defined here
+  menuId: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
   roleId: {
     type: DataTypes.INTEGER,
-    primaryKey: true,
     allowNull: false
   },
   applicationId: {
     type: DataTypes.INTEGER,
-    primaryKey: true,
     allowNull: false,
   },
   // common
-  id: {
-    type: DataTypes.INTEGER,
-    unique: true,
-    primaryKey: true,
-    allowNull: false,
-    autoIncrementIdentity: true
-  },
+  // id: {
+  //   type: DataTypes.INTEGER,
+  //   unique: true,
+  //   primaryKey: true,
+  //   allowNull: false,
+  //   autoIncrementIdentity: true
+  // },
   statusId: {
     type: DataTypes.INTEGER,
     allowNull: false
@@ -44,7 +46,7 @@ MenuRole.init({
   },
   createdBy: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   updatedAt: {
     type: DataTypes.DATE,
@@ -53,7 +55,7 @@ MenuRole.init({
   },
   updatedBy: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   }
 }, {
   sequelize,

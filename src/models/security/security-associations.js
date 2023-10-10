@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
   //USER
   User.belongsTo(Application);
   User.belongsTo(Status);
-  // User.hasOne(UserRole);
+  User.hasOne(UserRole);
 
 
   //ROLE

@@ -1,4 +1,4 @@
-const { User, Status, Application } = require('../../models/');
+const { User, Status, Application, UserRole, Role } = require('../../models/');
 // const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
@@ -12,6 +12,14 @@ const getAllUsers = async (req, res) => {
         },
         {
           model: Application,
+        },
+        {
+          model: UserRole,
+          include: [
+            {
+              model: Role
+            }
+          ]
         }
       ]
     });
@@ -28,14 +36,21 @@ const getAllUsers = async (req, res) => {
 const createUser = async (req, res) => {
   try {
     const { username, password, applicationId, statusId } = req.body;
+    const { roleId } = req.body;
     const newUser = await User.create({
       "username": username,
       "password": password,
       "applicationId": applicationId,
       "statusId": statusId
     });
+    const newUseRole = await UserRole.create({
+      "userId": newUser.id,
+      "roleId": roleId,
+      "statusId": 1,
+    })
     return res.status(201).json({
       user: newUser,
+      userRole: newUseRole,
       success: true,
     });
   } catch (error) {
@@ -46,7 +61,7 @@ const createUser = async (req, res) => {
 
 const editUser = async (req, res) => {
   try {
-    const { id, username, password, applicationId, statusId } = req.body;
+    const { id, username, password, roleId, applicationId, statusId } = req.body;
     // console.log(id);
     const updatedUser = await User.update({
       "username": username,
@@ -56,6 +71,13 @@ const editUser = async (req, res) => {
     }, {
       where: {
         id: id
+      }
+    });
+    const updatedUserRole = await UserRole.update({
+      "roleId": roleId,
+    }, {
+      where: {
+        "userId": id
       }
     });
     return res.status(201).json({

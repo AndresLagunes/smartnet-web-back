@@ -20,17 +20,17 @@ UserRole.init({
   },
   userId: {
     type: DataTypes.INTEGER,
-    primaryKey: true,
+    // primaryKey: true,
     allowNull: false,
   },
   // common
-  id: {
-    type: DataTypes.INTEGER,
-    unique: true,
-    primaryKey: true,
-    allowNull: false,
-    autoIncrementIdentity: true
-  },
+  // id: {
+  //   type: DataTypes.INTEGER,
+  //   unique: true,
+  //   primaryKey: true,
+  //   allowNull: false,
+  //   autoIncrementIdentity: true
+  // },
   statusId: {
     type: DataTypes.INTEGER,
     allowNull: false
@@ -43,7 +43,7 @@ UserRole.init({
   },
   createdBy: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   updatedAt: {
     type: DataTypes.DATE,
@@ -52,7 +52,7 @@ UserRole.init({
   },
   updatedBy: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   }
 }, {
   sequelize,
